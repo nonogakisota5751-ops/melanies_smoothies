@@ -28,6 +28,9 @@ if ingredients_list:
 
     for fruit_chosen in ingredients_list:
         ingredients_string += fruit_chosen + ' '
+        st.subheader(fruit_chosen + ' Nutrion Information')
+        fruityvice_response = requests.get("https://fruityvice.com/api/fruit/" + fruit_chusen)
+        fv_df = st.dataframe(data=fruityvice_response.json(), use_container_width=True)
 
     #st.write(ingredients_string)
 
@@ -44,7 +47,6 @@ if ingredients_list:
     # 名前入りの成功メッセージを表示（応用ステップ）
         st.success(f'Your Smoothie is ordered, {name_on_order}!', icon="✅")
 
-# Fruityviceの栄養情報を表示するセクション
 import requests
 fruityvice_response = requests.get("https://fruityvice.com/api/fruit/watermelon")
 fv_df = st.dataframe(data=fruityvice_response.json(), use_container_width=True)
