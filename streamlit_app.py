@@ -34,9 +34,12 @@ if ingredients_list:
         search_on = pd_df.loc[pd_df['FRUIT_NAME'] == fruit_chosen, 'SEARCH_ON'].iloc[0]
         
         # 取得した search_on を使って API を呼び出す
-        st.subheader(fruit_chosen + ' Nutrition Information')
         smoothiefroot_response = requests.get(f"https://my.smoothiefroot.com/api/fruit/{search_on}")
-        sf_df = st.dataframe(data=smoothiefroot_response.json(), use_container_width=True)
+
+        if smoothiefroot_response.status_code == 200:
+            sf_df = st.dataframe(data=smoothiefroot_response.json(), use_container_width=True)
+        else:
+            st.error(f"{fruit_chosen} の栄養情報の取得に失敗しました。")
 
     # SQL挿入文の組み立て
     my_insert_stmt = """ insert into smoothies.public.orders(ingredients, name_on_order)
