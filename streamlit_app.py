@@ -37,7 +37,7 @@ if ingredients_list:
         smoothiefroot_response = requests.get(f"https://my.smoothiefroot.com/api/fruit/{search_on}")
 
         if smoothiefroot_response.status_code == 200:
-            sf_df = st.dataframe(data=smoothiefroot_response.json(), use_container_width=True)
+            st.write(smoothiefroot_response.text)
         else:
             st.error(f"{fruit_chosen} の栄養情報の取得に失敗しました。")
 
