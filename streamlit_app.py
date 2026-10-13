@@ -43,8 +43,7 @@ if ingredients_list:
             sf_df = st.dataframe(data=smoothiefroot_response.json(), use_container_width=True)
         else:
             st.error(f"{fruit_chosen} のデータ取得に失敗しました。(SEARCH_ON: '{search_on}')")
-        # データフレーム形式で表示
-        sf_df = st.dataframe(data=smoothiefroot_response.json(), use_container_width=True)
+        
 
     # SQL挿入文の組み立て
     my_insert_stmt = """ insert into smoothies.public.orders(ingredients, name_on_order)
