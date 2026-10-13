@@ -39,6 +39,10 @@ if ingredients_list:
         # API呼び出し
         smoothiefroot_response = requests.get(f"https://my.smoothiefroot.com/api/fruit/{search_on}")
     
+        if smoothiefroot_response.status_code == 200:
+            sf_df = st.dataframe(data=smoothiefroot_response.json(), use_container_width=True)
+        else:
+            st.error(f"{fruit_chosen} のデータ取得に失敗しました。(SEARCH_ON: '{search_on}')")
         # データフレーム形式で表示
         sf_df = st.dataframe(data=smoothiefroot_response.json(), use_container_width=True)
 
